@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="camrender.js"></script>
+  </head>
+  <body>
+    <a-scene xr-mode-ui="XRMode: xr">
+
+        <a-assets>
+            <!-- Lienzos para que rendericen las cámaras -->
+            <canvas id="cam1"></canvas>
+            <canvas id="cam2"></canvas>
+          </a-assets>
+      <a-entity id="roja" position="-0.6 0.5 -3"
+        geometry="primitive: box" material="color: lightcoral"
+        shadow="receive: true">
+      </a-entity>
+      <a-entity id="azul" position="0.6 0.5 -3"
+        geometry="primitive: box" material="color: lightblue"
+        shadow="receive: true">
+      </a-entity>
+
+      <a-entity id="verde" position="0 0.5 -1.5"
+        geometry="primitive: box" material="color: lightgreen"
+        shadow="receive: true">
+      </a-entity>
+
+      <a-entity id="beige" position="0 0 -3" rotation="-90 0 0"
+        geometry="primitive: plane; width: 5; height: 5" material="color: peachpuff"
+        shadow="receive: true">
+      </a-entity>
+      <a-entity light="type: hemisphere; color: blue; groundColor: green; intensity: 3">
+      </a-entity>
+
+      <!-- Pantalla para mostrar la cámara principal -->
+      <a-plane position="4 1 1" rotation="0 -15 0" width="4" height="3"
+               material="src: #cam1; opacity: .90" canvas-updater>
+        </a-plane>
+
+      <a-entity position="0 0 5" wasd-controls="fly: true;">
+            <a-entity camera camrender="cid: cam1" position="0 1.6 0" look-controls>
+                  
+            </a-entity>
+       </a-entity>
+      
+
+      <a-entity light="type: ambient; color: #BBB"></a-entity>
+      <a-entity position="0 0 -3.3"
+      animation="property: rotation; from: 0 0 190; to: 0 0 350;
+            dur: 5000; easing: linear; loop: true; dir: alternate"
+          >
+        <a-entity light="type: directional; intensity: 5;
+              castShadow: true"
+            position="-4 0 0"
+            animation="property: light.color; from: #efe819; to: #ef1919; dur: 5000
+              easing: linear; loop: true; dir: alternate"
+            
+            >
+          <a-entity geometry="primitive: sphere; radius: 0.2"
+              material="color: orange"
+              rotation="0 0 90" position="0 0 0">
+          </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity position="0 0 4" movement-controls>
+        <a-entity camera position="0 1.6 0" look-controls wasd-controls>
+        </a-entity>
+    
+
+      <a-sky  color="lightyellow"></a-sky>
+    </a-scene>
+  </body>
+</html>
